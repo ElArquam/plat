@@ -1,0 +1,59 @@
+
+ALGORITHM the_scalar_product
+
+// 1.Write a procedure, called dot_product which calculates in the variable ps, the dot(scalar)
+// product of v1 and v2 (v1 and v2 are vectors of IR)
+
+// a procedure without return that contains array arr to recuperate the dot scalar product
+PROCEDURE dot_product(v1,v2:ARRAY_OF FLOAT,arr:ARRAY_OF FLOAT)
+VAR
+    ps : FLOAT := 0;
+BEGIN
+
+    // calculate the scalar product
+
+    FOR i FROM 0 TO v1.length STEP 1  DO
+        ps := ps + v1[i]*v2[i]
+    END_FOR
+
+    arr.push(ps)
+END
+
+// Variables of the algorithm
+VAR
+    n : INTEGER;
+    m : INTEGER;
+    vectors : ARRAY_OF FLOAT[]; // the array that contains all the vectors each vector has as length m
+    arr : ARRAY_OF FLOAT[];
+
+BEGIN
+
+    Write("enter the length of the array vectors")
+    Read(n)
+    Write("enter the length of each vector from array")
+    Read(m)
+
+    // put vectors inside the array vectors 
+    FOR i FROM 0 TO n-1 STEP 1  DO
+        FOR j FROM 0 TO m-1 STEP 1  DO
+            Write("enter the value numero",j+1," of vector numero ",i+1)
+            Read(vectors[i][j])
+        END_FOR
+    END_FOR
+    
+    // check if 2 given vectors are orthogonal
+    // we check the value of third parameter if it is equal to 0 
+    FOR i FROM 0 TO vectors.length STEP 1  DO
+       FOR j FROM i+1 TO vectors.length STEP 1  DO
+            dot_product(vectors[i],vectors[j],arr)
+            IF (arr[0]=0) THEN
+               Write("the vectors ",vectors[i]," and ",vectors[j]," are orthogonals . ")
+            END_IF   
+       END_FOR
+    END_FOR
+
+
+END
+
+
+
